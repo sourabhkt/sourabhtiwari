@@ -16,7 +16,7 @@ workflows:
     when: git log --since=1.minutes
     triggers:
       - schedule:
-          cron: "* * * * *" # 12am CET
+          cron: "* 1 * * *" # 12am CET
           filters:
             branches:
               only:
