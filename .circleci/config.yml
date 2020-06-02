@@ -16,6 +16,10 @@ workflows:
     triggers:
       - schedule:
           cron: "0 22 * * *"
+    filters:
+      branches:
+        only:
+          - circleci-project-setup
     when:
       not:
         equal: [CIRCLE_SHA1, LAST_RUN_COMMIT]
