@@ -9,18 +9,22 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: echo $CIRCLE_PULL_REQUEST
+            - run: echo CIRCLE_PULL_REQUEST
             - run: npm install
             - run: npm test
+      environment:
 workflows:
 #  when: << pipeline.git.revision != pipeline.git.base_revision	>>
   nightly:
     triggers:
       - schedule:
-          cron: "* 1 * * *" # 12am CET
+          cron: "* * * * *" # 12am CET
           filters:
             branches:
               only:
                 - master
     jobs:
       - build-and-test
+        post-steps:
+          - run:
+            - command: echo "upload artifact to s3"
