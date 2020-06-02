@@ -25,3 +25,4 @@ workflows:
         equal: [CIRCLE_SHA1, LAST_RUN_COMMIT]
     jobs:
       - build-and-test
+
