@@ -6,13 +6,15 @@ jobs:
     executor:
       name: node/default
     steps:
+      - run:
+          - echo << pipeline.git.revision >>
       - checkout
       - node/with-cache:
           steps:
             - run: npm install
             - run: npm test
 workflows:
-  when: << pipeline.git.revision != pipeline.git.base_revision	>>
+#  when: << pipeline.git.revision != pipeline.git.base_revision	>>
   nightly:
     triggers:
       - schedule:
