@@ -5,6 +5,8 @@ jobs:
   build-and-test:
     executor:
       name: node/default
+    environment:
+      LAST_RUN_COMMIT: $CIRCLE_SHA1
     steps:
       - checkout
       - node/with-cache:
@@ -13,8 +15,6 @@ jobs:
             - run: echo $CIRCLE_SHA1
             - run: npm install
             - run: npm test
-    environment:
-      LAST_RUN_COMMIT: $CIRCLE_SHA1
 workflows:
   nightly:
     triggers:
