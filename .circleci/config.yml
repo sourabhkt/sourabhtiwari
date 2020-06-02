@@ -12,6 +12,8 @@ jobs:
             - run: npm install
             - run: npm test
   ci_skip_check:
+    executor:
+      name: node/default
     steps:
       - run:
           command: |
