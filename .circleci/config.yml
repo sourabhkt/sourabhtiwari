@@ -12,6 +12,8 @@ jobs:
             - run: echo $CIRCLE_SHA1
             - run: npm install
             - run: npm test
+          environment:
+             LAST_RUN_COMMIT: $CIRCLE_SHA1
 workflows:
 #  when: << pipeline.git.revision != pipeline.git.base_revision	>>
   nightly:
@@ -24,8 +26,3 @@ workflows:
                 - master
     jobs:
       - build-and-test
-        post-steps:
-          - run:
-            - command: echo "upload artifact to s3"
-          - environment:
-              LAST_RUN_COMMIT: $CIRCLE_SHA1
