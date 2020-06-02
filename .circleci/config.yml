@@ -7,7 +7,7 @@ jobs:
       name: node/default
     steps:
       - run:
-          - echo << pipeline.git.revision >>
+          command: echo << pipeline.git.revision >>
       - checkout
       - node/with-cache:
           steps:
