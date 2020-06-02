@@ -16,10 +16,8 @@ workflows:
       triggers:
         - schedule:
             cron: "0 22 * * *"
+       when:
+         not:
+           equal: [CIRCLE_SHA1, LAST_RUN_COMMIT]
       jobs:
-        - build-and-test:
-            when:
-              not:
-                equal: [CIRCLE_SHA1, LAST_RUN_COMMIT]
-            environment:
-              LAST_RUN_COMMIT: $CIRCLE_SHA1
+        - build-and-test
