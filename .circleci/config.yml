@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 orbs:
   node: circleci/node@1.1.6
 jobs:
@@ -9,8 +9,9 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: echo $COMPARE_URL
-            
+            - run: echo $CIRCLE_PULL_REQUEST
+            - run: npm install
+            - run: npm test
 workflows:
 #  when: << pipeline.git.revision != pipeline.git.base_revision	>>
   nightly:
