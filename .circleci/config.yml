@@ -1,0 +1,25 @@
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
+jobs:
+  build-and-test:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - run: npm test
+workflows:
+    nightly:
+      triggers:
+        - schedule:
+            cron: "0 22 * * *"
+      jobs:
+        - build-and-test:
+            when:
+              not:
+                equal: [CIRCLE_SHA1, LAST_RUN_COMMIT]
+            environment:
+              LAST_RUN_COMMIT: $CIRCLE_SHA1
