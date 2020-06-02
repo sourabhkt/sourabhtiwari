@@ -15,11 +15,10 @@ workflows:
   nightly:
     triggers:
       - schedule:
-          cron: "1 * * * *"
+          cron: "* * * * *"
           filters:
             branches:
               only:
                 - circleci-project-setup
     jobs:
       - build-and-test
-      
