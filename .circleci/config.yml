@@ -10,6 +10,7 @@ jobs:
       - node/with-cache:
           steps:
             - run: echo $LAST_RUN_COMMIT
+            - run: echo << pipeline.git.revision >>
             - run: npm install
             - run: npm test
     environment:
