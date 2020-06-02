@@ -9,8 +9,16 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: echo << pipeline.git.revision >>
-            - run: echo << pipeline.git.base_revision >>
+            - run:
+                command: |
+                  echo << pipeline.id                 >>
+                  echo << pipeline.number             >>
+                  echo << pipeline.project.git_url    >>
+                  echo << pipeline.project.type       >>
+                  echo << pipeline.git.tag            >>
+                  echo << pipeline.git.branch         >>
+                  echo << pipeline.git.revision       >>
+                  echo << pipeline.git.base_revision  >>
             - run: npm install
             - run: npm test
 workflows:
@@ -18,7 +26,7 @@ workflows:
   nightly:
     triggers:
       - schedule:
-          cron: "* 1 * * *" # 12am CET
+          cron: "* * * * *" # 12am CET
           filters:
             branches:
               only:
