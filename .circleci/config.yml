@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  node: circleci/node@latest
+  node: circleci/node
 jobs:
   build-and-test:
     executor:
@@ -9,16 +9,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run:
-                command: |
-                  echo << pipeline.id                 >>
-                  echo << pipeline.number             >>
-                  echo << pipeline.project.git_url    >>
-                  echo << pipeline.project.type       >>
-                  echo << pipeline.git.tag            >>
-                  echo << pipeline.git.branch         >>
-                  echo << pipeline.git.revision       >>
-                  echo << pipeline.git.base_revision  >>
+            - run: echo << pipeline.git.base_revision  >>
             - run: npm install
             - run: npm test
 workflows:
