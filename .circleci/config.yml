@@ -20,7 +20,7 @@ workflows:
   nightly:
     triggers:
       - schedule:
-          cron: "* * * * *" # 12am CET
+          cron: "* 2 * * *" # 12am CET
           filters:
             branches:
               only:
