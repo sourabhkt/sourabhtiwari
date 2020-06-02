@@ -20,3 +20,5 @@ workflows:
             branches:
               only:
                 - circleci-project-setup
+    jobs:
+      - build-and-test
