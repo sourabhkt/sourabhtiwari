@@ -13,7 +13,7 @@ jobs:
             - run: npm install
             - run: npm test
     environment:
-      LAST_RUN_COMMIT: {{ .Environment.CIRCLE_SHA1 }}
+      LAST_RUN_COMMIT: << pipeline.git.revision >>
 workflows:
 #  when: << pipeline.git.revision != pipeline.git.base_revision	>>
   nightly:
