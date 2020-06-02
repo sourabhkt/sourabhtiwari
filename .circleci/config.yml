@@ -11,12 +11,16 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
+  ci_skip_check:
+    steps:
+      - run:
+          command: |
+            NEW_COMMITS=$(git log --since=1.minutes)
+            if !NEW_COMMITS; then
+              circleci-agent step halt
+            fi
 workflows:
   nightly:
-    run: |
-        if [ "$CIRCLE_BRANCH" != "develop" ]; then
-            circleci-agent step halt
-        fi
     triggers:
       - schedule:
           cron: "* * * * *" # 12am CET
@@ -25,4 +29,5 @@ workflows:
               only:
                 - circleci-project-setup
     jobs:
+      - ci_skip_check
       - build-and-test
