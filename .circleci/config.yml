@@ -9,7 +9,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: echo $CIRCLE_SHA1
+            - run: echo $LAST_RUN_COMMIT
             - run: npm install
             - run: npm test
     environment:
