@@ -6,7 +6,7 @@ jobs:
     executor:
       name: node/default
     environment:
-      LAST_RUN_COMMIT: CIRCLE_SHA1
+      LAST_RUN_COMMIT: "$CIRCLE_SHA1"
     steps:
       - checkout
       - node/with-cache:
@@ -19,7 +19,7 @@ workflows:
   nightly:
     triggers:
       - schedule:
-          cron: "* 1 * * *"
+          cron: "* * * * *"
           filters:
             branches:
               only:
