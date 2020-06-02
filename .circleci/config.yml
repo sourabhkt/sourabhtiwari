@@ -11,20 +11,22 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
+            - run: echo $LAST_RUN_COMMIT
+            - run: echo $CIRCLE_SHA1
     environment:
-      LAST_RUN_COMMIT: CIRCLE_SHA1
+      LAST_RUN_COMMIT: $CIRCLE_SHA1
 workflows:
   nightly:
     triggers:
       - schedule:
-          cron: "* 1 * * *"
+          cron: "* * * * *"
           filters:
             branches:
               only:
                 - circleci-project-setup
     when:
       not:
-        equal: [CIRCLE_SHA1, LAST_RUN_COMMIT]
+        equal: [$CIRCLE_SHA1, $LAST_RUN_COMMIT]
 
     jobs:
       - build-and-test
