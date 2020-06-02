@@ -1,4 +1,4 @@
-version: 2.1
+version: 2.0
 orbs:
   node: circleci/node@1.1.6
 jobs:
@@ -9,7 +9,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: echo << pipeline.git.base_revision  >>
+            - run: echo $COMPARE_URL
             
 workflows:
 #  when: << pipeline.git.revision != pipeline.git.base_revision	>>
