@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  node: circleci/node@1.1.6
+  node: circleci/node@latest
 jobs:
   build-and-test:
     executor:
@@ -11,12 +11,6 @@ jobs:
           steps:
             - run:
                 command: |
-                  echo << pipeline.id                 >>
-                  echo << pipeline.number             >>
-                  echo << pipeline.project.git_url    >>
-                  echo << pipeline.project.type       >>
-                  echo << pipeline.git.tag            >>
-                  echo << pipeline.git.branch         >>
                   echo << pipeline.git.revision       >>
                   echo << pipeline.git.base_revision  >>
             - run: npm install
