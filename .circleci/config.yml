@@ -13,7 +13,7 @@ jobs:
             - run: npm test
 workflows:
   nightly:
-    when: << git log --since=1.minutes >>
+    when: git log --since=1.minutes
     triggers:
       - schedule:
           cron: "* * * * *" # 12am CET
