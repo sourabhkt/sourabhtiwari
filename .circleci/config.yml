@@ -9,10 +9,10 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: npm install
-            - run: npm test
             - run: echo << pipeline.git.revision >>
             - run: echo << pipeline.git.base_revision >>
+            - run: npm install
+            - run: npm test
 workflows:
 #  when: << pipeline.git.revision != pipeline.git.base_revision	>>
   nightly:
