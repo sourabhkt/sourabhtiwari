@@ -14,6 +14,7 @@ jobs:
   ci_skip_check:
     executor:
       name: node/default
+    working_directory: ~/sourabhtiwari.com
     steps:
       - run:
           command: |
@@ -25,7 +26,7 @@ workflows:
   nightly:
     triggers:
       - schedule:
-          cron: "* 1 * * *" # 12am CET
+          cron: "* * * * *" # 12am CET
           filters:
             branches:
               only:
