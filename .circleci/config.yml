@@ -13,10 +13,13 @@ jobs:
             - run: npm test
 workflows:
   nightly:
-    when: git log --since=1.minutes
+    run: |
+        if [ "$CIRCLE_BRANCH" != "develop" ]; then
+            circleci-agent step halt
+        fi
     triggers:
       - schedule:
-          cron: "* 1 * * *" # 12am CET
+          cron: "* * * * *" # 12am CET
           filters:
             branches:
               only:
