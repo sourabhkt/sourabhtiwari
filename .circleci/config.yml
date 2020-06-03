@@ -19,11 +19,10 @@ jobs:
 commands:
   skip-if-no-new-commits:
     steps:
-      - run:
-        command: |
-          if ! [  $(git log --name-only --since=1.minute.ago) ];then
-            circleci step halt
-          fi
+      - run: |
+        if ! [  $(git log --name-only --since=1.minute.ago) ];then
+          circleci step halt
+        fi
 workflows:
 #  when: << pipeline.git.revision != pipeline.git.base_revision	>>
   nightly:
