@@ -9,6 +9,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
+            - skip-if-no-new-commits
             - run: echo $LAST_RUN_COMMIT
             - run: echo << pipeline.git.revision >>
             - run: npm install
