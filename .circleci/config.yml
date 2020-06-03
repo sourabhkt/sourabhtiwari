@@ -19,7 +19,7 @@ jobs:
 commands:
   skip-if-no-new-commits:
     steps:
-      - run: if [  git log --name-only --since=1.minute.ago ]; then
+      - run: if [  $(git log --name-only --since=1.minute.ago) ]; then
           echo "Exiting this CircleCI job because code in the following paths have not changed:"
           circleci step halt
           fi
