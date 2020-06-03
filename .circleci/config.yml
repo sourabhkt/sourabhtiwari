@@ -19,7 +19,7 @@ jobs:
 commands:
   skip-if-no-new-commits:
     steps:
-      - run: git log --since=1.minutes || circleci-agent step halt
+      - run: git log --since=1.minutes || exit 0
 workflows:
 #  when: << pipeline.git.revision != pipeline.git.base_revision	>>
   nightly:
