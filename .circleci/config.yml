@@ -9,19 +9,17 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - skip-if-no-new-commits
-            - run: echo $LAST_RUN_COMMIT
-            - run: echo << pipeline.git.revision >>
             - run: npm install
             - run: npm test
-    environment:
-      LAST_RUN_COMMIT: << pipeline.git.revision >>
-commands:
-  skip-if-no-new-commits:
+  multibrowser:
+    executore:
+      name: node/default
     steps:
-      - run: if git log --since=1.minute.ago; then circleci-agent step halt; fi
+      - checkout
+      - node/with-cache:
+        steps:
+          - run: echo "woohoo!"
 workflows:
-#  when: << pipeline.git.revision != pipeline.git.base_revision	>>
   nightly:
     triggers:
       - schedule:
@@ -29,6 +27,9 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - safemode
     jobs:
       - build-and-test
+      - multibrowser:
+          requires:
+            - build-and-test
