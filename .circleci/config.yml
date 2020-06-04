@@ -27,7 +27,7 @@ workflows:
           filters:
             branches:
               only:
-                - safemode
+                - master
     jobs:
       - build-and-test
       - multibrowser:
